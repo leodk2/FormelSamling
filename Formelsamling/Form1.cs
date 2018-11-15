@@ -61,10 +61,12 @@ namespace Formelsamling
             */
             #endregion
 
-            // add all types, could be made automatic but ok
-            mathFormulas.Add(new CircleCircumference());
-            mathFormulas.Add(new SquareCircumference());
-            mathFormulas.Add(new BoxVolume());
+            // automatically finds all formulas in namespace
+            var Types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace.StartsWith("Formelsamling.Formulary.MathFormulary"));
+            foreach (var t in Types)
+            {
+                mathFormulas.Add((IBaseFormula)Activator.CreateInstance(t));
+            }
 
             // generates TreeNodes
             TreeNode mathNode = FormelTree.Nodes.Add("Matematik");
@@ -91,17 +93,6 @@ namespace Formelsamling
             
         }
 
-
-     /*   void GenerateComboBox(int varCount)
-        {
-            foreach(CheckBox checkBox in checkBoxes)
-            {
-                Controls.Remove(checkBox);
-                checkBox.Dispose();
-            }
-            
-        }
-        */
         void GeneratePage(int varCount)
         {
             // clears page
