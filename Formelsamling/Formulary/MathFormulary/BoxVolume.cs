@@ -11,12 +11,13 @@ namespace Formelsamling.Formulary.MathFormulary
     class BoxVolume : IBaseFormula
     {
         public string FormulaName { get { return "Rumfang Kasse"; } }
-        public List<string> VariableNames { get { return new List<string>() { "Højde", "Længde", "Bredde", "Rumfang" }; } }
+        public List<string> VariableNames { get { return new List<string>() { "Rumfang", "Højde", "Længde", "Bredde" }; } }
 
         /// <summary>
         ///     calulated volume
         /// </summary>
         ///<param name="Params">
+        ///     volume
         ///     height
         ///     length
         ///     width
@@ -26,25 +27,25 @@ namespace Formelsamling.Formulary.MathFormulary
         /// </returns>
         public double equation1(double[] Params)
         {
-            return Params[0] * Params[1] * Params[2];
+            return Params[1] * Params[2] * Params[3];
         }
 
         // finds Height
         public double equation2(double[] Params)
         {
-            return Params[0]; // just a test
+            return Params[0] / (Params[2] * Params[3]);
         }
 
         // finds Width
         public double equation3(double[] Params)
         {
-            return Params[0]; // just a test
+            return Params[0] / (Params[1] * Params[3]);
         }
 
         // finds Length
         public double equation4(double[] Params)
         {
-            return Params[0]; // just a test
+            return Params[0] / (Params[1] * Params[2]);
         }
 
         public List<EquationAction> Equations

@@ -115,33 +115,68 @@ namespace Formelsamling
                 Controls.Remove(label);
                 label.Dispose();
             }
+
+            fVariables.Items.Clear();
+
+
             // clears lists
             VariableInputs.Clear();
             VariableLabels.Clear();
             
-            // creates new textboxes
-            for (int i = 0; i < varCount-1; i++)
+            // loop through each variable and create textboxes, labels and populate the checkboxlist
+            for (int i = 0; i < varCount; i++)
             {
-                // label
+                /// labels
                 Label label = new Label
                 {
-                    Text = currentFormula.VariableNames.ElementAt(i),
+                    Text = currentFormula.VariableNames[i],
                     Size = new Size(100, 20),
                     Location = new Point(200 + i * 120, 80)
                 };
                 Controls.Add(label);
                 VariableLabels.Add(label);
 
-                // inputbox
+                // inputboxes
                 TextBox textBox = new TextBox
                 {
                     Size = new Size(100, 20),
                     Location = new Point(200 + i * 120, 100)
                 };
+                // if first, disable
+                if (i == 0)
+                {
+                    textBox.Enabled = false;
+                }
                 Controls.Add(textBox);
                 VariableInputs.Add(textBox);
+
+                /// checkboxlist
+                // check box if first index
+                if (i == 0)
+                {
+                    fVariables.Items.Add(currentFormula.VariableNames[i], true);
+                }
+                else
+                {
+                    fVariables.Items.Add(currentFormula.VariableNames[i]);
+                }
+
             }
-            GenerateCheckBox();
+        }
+
+        void ChangeEquation()
+        {
+            for (int i = 0; i < VariableInputs.Count; i++)
+            {
+                if (i == currentEquationIndex)
+                {
+                    VariableInputs[i].Enabled = false;
+                }
+                else
+                {
+                    VariableInputs[i].Enabled = true;
+                }
+            }
         }
 
         private void FormelTree_AfterSelect(object sender, TreeViewEventArgs e)
@@ -157,6 +192,7 @@ namespace Formelsamling
 
         }
 
+        // on calculation button pressed
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             if (currentFormula != null)
@@ -164,12 +200,34 @@ namespace Formelsamling
                 List<double> parameters = new List<double>();
                 foreach (TextBox tb in VariableInputs)
                 {
-                    parameters.Add(Convert.ToDouble(tb.Text));
+                    if (Double.TryParse(tb.Text, out double num))
+                    {
+                        parameters.Add(num);
+                    }
+                    else
+                    {
+                        parameters.Add(0);
+                    }
                 }
 
-                result = currentFormula.Equations[0](parameters.ToArray());
+                result = currentFormula.Equations[currentEquationIndex](parameters.ToArray());
                 Console.WriteLine(result);
             }
+        }
+
+        private void fVariables_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // uncheck checked previously checked item so only 1 item is checked
+            if (e.NewValue == CheckState.Checked)
+            {
+                for (int ix = 0; ix < fVariables.Items.Count; ++ix)
+                {
+                    if (e.Index != ix) fVariables.SetItemChecked(ix, false);
+                }
+                currentEquationIndex = e.Index;
+                ChangeEquation();
+            }
+            
         }
     }
 }

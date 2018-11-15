@@ -61,11 +61,13 @@
             // 
             // fVariables
             // 
+            this.fVariables.CheckOnClick = true;
             this.fVariables.FormattingEnabled = true;
-            this.fVariables.Location = new System.Drawing.Point(680, 346);
+            this.fVariables.Location = new System.Drawing.Point(680, 299);
             this.fVariables.Name = "fVariables";
-            this.fVariables.Size = new System.Drawing.Size(108, 49);
+            this.fVariables.Size = new System.Drawing.Size(108, 139);
             this.fVariables.TabIndex = 4;
+            this.fVariables.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.fVariables_ItemCheck);
             // 
             // Form1
             // 
