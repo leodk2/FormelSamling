@@ -35,8 +35,5 @@ namespace Formelsamling.Formulary.MathFormulary
                 };
             }
         }
-
-
     }
-    
 }
