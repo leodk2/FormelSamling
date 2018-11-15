@@ -36,9 +36,9 @@
             // 
             // FormelTree
             // 
-            this.FormelTree.Location = new System.Drawing.Point(12, 34);
+            this.FormelTree.Location = new System.Drawing.Point(12, 38);
             this.FormelTree.Name = "FormelTree";
-            this.FormelTree.Size = new System.Drawing.Size(150, 404);
+            this.FormelTree.Size = new System.Drawing.Size(150, 400);
             this.FormelTree.TabIndex = 0;
             this.FormelTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.FormelTree_AfterSelect);
             // 
@@ -54,7 +54,7 @@
             // 
             // FormulaSearch
             // 
-            this.FormulaSearch.Location = new System.Drawing.Point(12, 8);
+            this.FormulaSearch.Location = new System.Drawing.Point(12, 12);
             this.FormulaSearch.Name = "FormulaSearch";
             this.FormulaSearch.Size = new System.Drawing.Size(150, 20);
             this.FormulaSearch.TabIndex = 3;
@@ -78,8 +78,9 @@
             this.Controls.Add(this.FormulaSearch);
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.FormelTree);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Formelsamling";
             this.ResumeLayout(false);
             this.PerformLayout();
 

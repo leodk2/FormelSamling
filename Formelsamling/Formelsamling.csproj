@@ -54,6 +54,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Formulary\MathFormulary\CircleCircumference.cs" />
+    <Compile Include="Formulary\MathFormulary\TestFormula.cs" />
     <Compile Include="Formulary\MathFormulary\SquareCircumference.cs" />
     <Compile Include="Formulary\MathFormulary\BoxVolume.cs" />
     <Compile Include="Formulary\Properties\Constants.cs" />

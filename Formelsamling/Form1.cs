@@ -122,7 +122,9 @@ namespace Formelsamling
                 {
                     Text = currentFormula.VariableNames[i],
                     Size = new Size(100, 20),
-                    Location = new Point(200 + i * 120, 80)
+                    
+                    Location = new Point(200 + i % 5 * 120, 80 + Convert.ToInt32(60 * Math.Floor(i/5.0)))
+                    //Location = new Point(((Width - (FormelTree.Width + 24)) / (varCount)) * i + FormelTree.Width + 24, 80)
                 };
                 Controls.Add(label);
                 VariableLabels.Add(label);
@@ -131,7 +133,8 @@ namespace Formelsamling
                 TextBox textBox = new TextBox
                 {
                     Size = new Size(100, 20),
-                    Location = new Point(200 + i * 120, 100)
+                    Location = new Point(200 + i % 5 * 120, 100 + Convert.ToInt32(60 * Math.Floor(i / 5.0)))
+                    //Location = new Point(((Width - (FormelTree.Width + 24)) / (varCount)) * i + FormelTree.Width + 24, 100)
                 };
                 // if first, disable
                 if (i == 0)
