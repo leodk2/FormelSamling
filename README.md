@@ -1,2 +1,2 @@
 # FormelSamling
-Collection of fomulas
+Collection of fomulas:

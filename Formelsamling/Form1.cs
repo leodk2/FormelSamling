@@ -106,9 +106,7 @@ namespace Formelsamling
                 Controls.Remove(label);
                 label.Dispose();
             }
-
             fVariables.Items.Clear();
-
 
             // clears lists
             VariableInputs.Clear();
@@ -136,6 +134,25 @@ namespace Formelsamling
                     Location = new Point(200 + i % 5 * 120, 100 + Convert.ToInt32(60 * Math.Floor(i / 5.0)))
                     //Location = new Point(((Width - (FormelTree.Width + 24)) / (varCount)) * i + FormelTree.Width + 24, 100)
                 };
+
+                // add event for when text changes to clean from non-double chars
+                textBox.TextChanged += (sender, e) =>
+                {
+                    // stores cursor position in textbox so it doesn't move
+                    int selectionStart = textBox.SelectionStart;
+                    // allowed chars
+                    string doubleChars = "1234567890.";
+                    // loops through every character, and if it's not in doubleChars, removes it and adjusts cursor
+                    for (int ix = 0; ix < textBox.Text.Length; ix++)
+                    {
+                        if (!doubleChars.Contains(textBox.Text[ix]))
+                        {
+                            textBox.Text = textBox.Text.Remove(ix, 1);
+                            textBox.SelectionStart = selectionStart-1;
+                        }
+                    }
+                };
+
                 // if first, disable
                 if (i == 0)
                 {
@@ -165,6 +182,8 @@ namespace Formelsamling
                 if (i == currentEquationIndex)
                 {
                     VariableInputs[i].Enabled = false;
+                    // clears text when disabled; is this helpful?
+                    //VariableInputs[i].Text = "";
                 }
                 else
                 {
@@ -189,8 +208,10 @@ namespace Formelsamling
         // on calculation button pressed
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            // if there is a formula
             if (currentFormula != null)
             {
+                // gets all parameter inputs and converts them to array
                 List<double> parameters = new List<double>();
                 foreach (TextBox tb in VariableInputs)
                 {
@@ -204,7 +225,9 @@ namespace Formelsamling
                     }
                 }
 
+                // uses the current selected equation and parses parameters as array, and assigns result to it
                 result = currentFormula.Equations[currentEquationIndex](parameters.ToArray());
+                ResultTextbox.Text = result.ToString();
                 Console.WriteLine(result);
             }
         }
@@ -221,7 +244,6 @@ namespace Formelsamling
                 currentEquationIndex = e.Index;
                 ChangeEquation();
             }
-            
         }
     }
 }
