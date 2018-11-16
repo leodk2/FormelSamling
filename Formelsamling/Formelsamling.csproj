@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\Class1.cs" />
     <Compile Include="CustomDelegates.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

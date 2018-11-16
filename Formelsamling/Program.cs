@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Formelsamling.Authentication;
+
 namespace Formelsamling
 {
     static class Program
@@ -16,6 +18,8 @@ namespace Formelsamling
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // authenticate
 
             Form1 form = new Form1();
             

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Formelsamling.Formulary.Properties
 {
-    static class Constants
+    public class Constants
     {
-        static readonly double Pi = 3.14159265359;
-        static readonly double grvitationalConstant = 9.82;
+        public static readonly double Pi = 3.14159265359;
+        public static readonly double grvitationalConstant = 9.82;
     }
 }
