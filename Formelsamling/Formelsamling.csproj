@@ -57,6 +57,7 @@
     <Compile Include="Formulary\MathFormulary\TestFormula.cs" />
     <Compile Include="Formulary\MathFormulary\SquareCircumference.cs" />
     <Compile Include="Formulary\MathFormulary\BoxVolume.cs" />
+    <Compile Include="Formulary\PhysicsFormulary\OhmLaw.cs" />
     <Compile Include="Formulary\Properties\Constants.cs" />
     <Compile Include="Formulary\Properties\FormulaInterfaces.cs" />
     <Compile Include="Program.cs" />

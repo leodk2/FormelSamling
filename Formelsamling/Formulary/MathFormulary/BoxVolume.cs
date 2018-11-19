@@ -25,25 +25,25 @@ namespace Formelsamling.Formulary.MathFormulary
         /// <returns>
         ///     volume
         /// </returns>
-        public double equation1(double[] Params)
+        public double Equation1(double[] Params)
         {
             return Params[1] * Params[2] * Params[3];
         }
 
         // finds Height
-        public double equation2(double[] Params)
+        public double Equation2(double[] Params)
         {
             return Params[0] / (Params[2] * Params[3]);
         }
 
         // finds Width
-        public double equation3(double[] Params)
+        public double Equation3(double[] Params)
         {
             return Params[0] / (Params[1] * Params[3]);
         }
 
         // finds Length
-        public double equation4(double[] Params)
+        public double Equation4(double[] Params)
         {
             return Params[0] / (Params[1] * Params[2]);
         }
@@ -53,10 +53,10 @@ namespace Formelsamling.Formulary.MathFormulary
             get
             {
                 return new List<EquationAction>() {
-                    equation1,
-                    equation2,
-                    equation3,
-                    equation4
+                    Equation1,
+                    Equation2,
+                    Equation3,
+                    Equation4
                 };
             }
         }

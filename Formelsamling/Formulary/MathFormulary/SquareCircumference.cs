@@ -13,14 +13,14 @@ namespace Formelsamling.Formulary.MathFormulary
         public string FormulaName { get { return "Omkreds Firkant"; } }
         public List<string> VariableNames { get { return new List<string>() { "Sidelængde", "Omkreds" }; } }
         
-        // finds circumference
-        public double equation1(double[] sideLength)
+        // finds omkreds
+        public double Equation1(double[] sideLength)
         {
-            return sideLength[0]; // just a test
+            return sideLength[0]*4; // just a test
         }
 
-        // finds radius
-        public double equation2(double[] circumference)
+        // finds areal
+        public double Equation2(double[] circumference)
         {
             return circumference[0]; // just a test
         }
@@ -30,8 +30,8 @@ namespace Formelsamling.Formulary.MathFormulary
             get
             {
                 return new List<EquationAction>() {
-                    equation1,
-                    equation2,
+                    Equation1,
+                    Equation2,
                 };
             }
         }

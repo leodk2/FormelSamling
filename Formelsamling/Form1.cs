@@ -21,11 +21,12 @@ namespace Formelsamling
         public Form1()
         {
             InitializeComponent();
-            generateTreeView();
+            GenerateTreeView();
         }
 
         // mathformulary
         List<IBaseFormula> mathFormulas = new List<IBaseFormula>();
+        List<IBaseFormula> PhysFormulas = new List<IBaseFormula>();
 
         // keeps track of current values
         IBaseFormula currentFormula;
@@ -37,7 +38,7 @@ namespace Formelsamling
         
 
         // startup
-        void generateTreeView()
+        void GenerateTreeView()
         {
             #region alternative way
             // gets every class in namespace
@@ -62,36 +63,32 @@ namespace Formelsamling
             #endregion
 
             // automatically finds all formulas in namespace
-            var Types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace.StartsWith("Formelsamling.Formulary.MathFormulary"));
-            foreach (var t in Types)
+            var mTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace.StartsWith("Formelsamling.Formulary.MathFormulary"));
+            foreach (var t in mTypes)
             {
                 mathFormulas.Add((IBaseFormula)Activator.CreateInstance(t));
             }
-
+            var pTypes  = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace.StartsWith("Formelsamling.Formulary.PhysicsFormulary"));
+            foreach(var t in pTypes)
+            {
+                PhysFormulas.Add((IBaseFormula)Activator.CreateInstance(t));
+            }
             // generates TreeNodes
             TreeNode mathNode = FormelTree.Nodes.Add("Matematik");
             foreach (IBaseFormula formula in mathFormulas)
             {
                 mathNode.Nodes.Add(formula.FormulaName);
             }
-            
-            
-        }
 
-        void GenerateCheckBox()
-        {
-            fVariables.Items.Clear();
-            var variables = currentFormula.VariableNames;
-
-            //fVariables.Items.
-
-
-            for(int i = 0; i <= currentFormula.VariableNames.Count; i++)
+            TreeNode physNode = FormelTree.Nodes.Add("Fysik");
+            foreach(IBaseFormula formula in PhysFormulas)
             {
-                fVariables.Items.Add(variables);
+                physNode.Nodes.Add(formula.FormulaName);
             }
             
+            
         }
+
 
         void GeneratePage(int varCount)
         {
@@ -178,6 +175,15 @@ namespace Formelsamling
             foreach (IBaseFormula formula in mathFormulas) // should be all (joined) formulas
             {
                 if (e.Node.Text == formula.FormulaName) {
+                    currentFormula = formula;
+                    GeneratePage(formula.VariableNames.Count);
+                    break;
+                }
+            }
+            foreach(IBaseFormula formula in PhysFormulas)
+            {
+                if (e.Node.Text == formula.FormulaName)
+                {
                     currentFormula = formula;
                     GeneratePage(formula.VariableNames.Count);
                     break;

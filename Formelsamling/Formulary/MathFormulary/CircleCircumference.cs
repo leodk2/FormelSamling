@@ -14,13 +14,13 @@ namespace Formelsamling.Formulary.MathFormulary
         public List<string> VariableNames { get { return new List<string>() { "Radius", "Omkreds" }; } }
         
         // finds circumference
-        public double equation1(double[] radius)
+        public double Equation1(double[] radius)
         {
             return radius[0]; // just a test
         }
 
         // finds radius
-        public double equation2(double[] circumference)
+        public double Equation2(double[] circumference)
         {
             return circumference[0]; // just a test
         }
@@ -30,8 +30,8 @@ namespace Formelsamling.Formulary.MathFormulary
             get
             {
                 return new List<EquationAction>() {
-                    equation1,
-                    equation2,
+                    Equation1,
+                    Equation2,
                 };
             }
         }
