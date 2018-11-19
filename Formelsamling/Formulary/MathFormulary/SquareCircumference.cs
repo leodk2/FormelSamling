@@ -11,18 +11,18 @@ namespace Formelsamling.Formulary.MathFormulary
     class SquareCircumference : IBaseFormula
     {
         public string FormulaName { get { return "Omkreds Firkant"; } }
-        public List<string> VariableNames { get { return new List<string>() { "Sidelængde", "Omkreds" }; } }
+        public List<string> VariableNames { get { return new List<string>() { "Omkreds", "Sidelængde" }; } }
         
-        // finds omkreds
-        public double Equation1(double[] sideLength)
+        // finds circumference
+        public double FindCirc(double[] Params)
         {
-            return sideLength[0]*4; // just a test
+            return 4 * Params[1];
         }
 
-        // finds areal
-        public double Equation2(double[] circumference)
+        // finds radius
+        public double FindSide(double[] Params)
         {
-            return circumference[0]; // just a test
+            return Params[0] / 4;
         }
 
         public List<EquationAction> Equations
@@ -30,8 +30,8 @@ namespace Formelsamling.Formulary.MathFormulary
             get
             {
                 return new List<EquationAction>() {
-                    Equation1,
-                    Equation2,
+                    FindCirc,
+                    FindSide
                 };
             }
         }

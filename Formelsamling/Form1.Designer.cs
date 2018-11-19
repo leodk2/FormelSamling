@@ -32,6 +32,7 @@
             this.CalculateButton = new System.Windows.Forms.Button();
             this.FormulaSearch = new System.Windows.Forms.TextBox();
             this.fVariables = new System.Windows.Forms.CheckedListBox();
+            this.ResultTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // FormelTree
@@ -44,7 +45,7 @@
             // 
             // CalculateButton
             // 
-            this.CalculateButton.Location = new System.Drawing.Point(421, 404);
+            this.CalculateButton.Location = new System.Drawing.Point(385, 415);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(75, 23);
             this.CalculateButton.TabIndex = 1;
@@ -69,11 +70,21 @@
             this.fVariables.TabIndex = 4;
             this.fVariables.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.fVariables_ItemCheck);
             // 
+            // ResultTextbox
+            // 
+            this.ResultTextbox.Location = new System.Drawing.Point(348, 389);
+            this.ResultTextbox.Name = "ResultTextbox";
+            this.ResultTextbox.ReadOnly = true;
+            this.ResultTextbox.Size = new System.Drawing.Size(150, 20);
+            this.ResultTextbox.TabIndex = 5;
+            this.ResultTextbox.Text = "Resultat her";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ResultTextbox);
             this.Controls.Add(this.fVariables);
             this.Controls.Add(this.FormulaSearch);
             this.Controls.Add(this.CalculateButton);
@@ -92,6 +103,7 @@
         private System.Windows.Forms.Button CalculateButton;
         private System.Windows.Forms.TextBox FormulaSearch;
         private System.Windows.Forms.CheckedListBox fVariables;
+        private System.Windows.Forms.TextBox ResultTextbox;
     }
 }
 
