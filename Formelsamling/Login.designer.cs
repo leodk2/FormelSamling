@@ -31,6 +31,7 @@
             this.EmailField = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.NyBruger = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // EmailField
@@ -59,11 +60,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // NyBruger
+            // 
+            this.NyBruger.Location = new System.Drawing.Point(232, 148);
+            this.NyBruger.Name = "NyBruger";
+            this.NyBruger.Size = new System.Drawing.Size(75, 23);
+            this.NyBruger.TabIndex = 3;
+            this.NyBruger.Text = "Ny bruger? Klik her!";
+            this.NyBruger.UseVisualStyleBackColor = true;
+            this.NyBruger.Click += new System.EventHandler(this.NyBruger_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 183);
+            this.Controls.Add(this.NyBruger);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.EmailField);
@@ -78,5 +90,6 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox EmailField;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button NyBruger;
     }
 }

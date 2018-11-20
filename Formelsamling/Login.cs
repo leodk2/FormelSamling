@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Formelsamling.Authentication;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,21 +20,42 @@ namespace Formelsamling
         public Login()
         {
             InitializeComponent();
+            NyBruger.AutoSize = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           /* if (SQL.SqlReader("Uid", EmailField.Text,  "Mac", SQL.sqlConnection))
+            if (SQL.SqlReader("Uid", EmailField.Text,  "Mac", SQL.sqlConnection))
             {
                 this.Hide();
-                Formelsamling formelsamling = new Formelsamling();
-                TreeNode[] treeNodes = new TreeNode[] { new MathFormulary().treeNode, new PhysicsFormulary().treeNode, };
-                formelsamling.funcList.Nodes.AddRange(treeNodes);
+                FormelSamling formelsamling = new FormelSamling();
                 formelsamling.Show();
                 Print("did this");
+                //this.Close();
+                //this.Dispose();
+                Print("Form Lukket");
 
 
-            }*/
+            }
       }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NyBruger_Click(object sender, EventArgs e)
+        {
+            AddEmailToForm addEmailToForm = new AddEmailToForm();
+            Login login = new Login();
+            addEmailToForm.Location = login.Location;
+            Point point = new Point();
+            point = login.Location;
+            addEmailToForm.Location = point;
+
+            addEmailToForm.Show();
+            this.Hide();
+            Print("Form lukket");
+        }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using Formelsamling.Authentication;
 
 namespace Formelsamling
@@ -16,15 +15,17 @@ namespace Formelsamling
         [STAThread]
         static void Main()
         {
+            Console.WriteLine("skreven linje");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             // authenticate
+            FormelSamling form = new FormelSamling();
+            Login login = new Login();
+            //SQL.SqlConnect();
 
-            Form1 form = new Form1();
-            
             // run program
-            Application.Run(form);
+            Application.Run(login);
         }
     }
 }

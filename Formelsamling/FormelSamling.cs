@@ -16,9 +16,9 @@ using Formelsamling.Formulary.MathFormulary;
 
 namespace Formelsamling
 {
-    public partial class Form1 : Form
+    public partial class FormelSamling : Form
     {
-        public Form1()
+        public FormelSamling()
         {
             InitializeComponent();
             GenerateTreeView();

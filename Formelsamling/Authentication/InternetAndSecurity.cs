@@ -10,8 +10,9 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
-namespace Formelsamling
+namespace Formelsamling.Authentication
 {
     /// <summary>
     /// This is where we put all of the networking, security and sql stuff
@@ -53,21 +54,32 @@ namespace Formelsamling
             //open the connection to the sql database
             sqlConnection.Open();
             Print("Åben");
+           
             //I don't think that this method should be here in the final release of the program
             //SqlReader("Uid", "kim@strandjaegervej.dk", "Code1", sqlConnection);
 
         }
 
+        public static void SqlWrite(string email)
+        {
+            //sqlConnection.Open(); ;
+            cmd = new SqlCommand("insert into dbo.user_Codes (UId) values ("+email+")", sqlConnection);
+            cmd = new SqlCommand("INSERT INTO ")
+            //cmd = new SqlCommand("insert into dbo.user_Codes (UID), values(" + email + ")", sqlConnection);
+            Print(email);
+            
+        }
         //this method is run whenever we need to read something from the SQL database
         public static bool SqlReader(string columnHeader, string userToLookFor, string ItemToLookFor, SqlConnection sqlConnection)
         {
+            SqlConnect();
             try
             {
                 //!! creates new cmd and reader. Problem is if it's called in different instances, it'll create a new for each
                 if (cmd == null)
                 {
                     cmd = new SqlCommand("select * from dbo.user_Codes", sqlConnection);
-                    Console.WriteLine("new cmd");
+                    Console.WriteLine("new read");
                 }
                 if (reader != null)
                 {
@@ -85,6 +97,7 @@ namespace Formelsamling
                     {
                         Print(reader[ItemToLookFor]);
                         Console.WriteLine("true");
+                        sqlConnection.Close();
                         return true;
                     }
 
@@ -96,9 +109,10 @@ namespace Formelsamling
             {
                 Print(e.ToString());
                 Print("false exception");
+                sqlConnection.Close();
                 return false;
             }
-
+            
         }
         public SqlParameter SqlAddMac()
         {

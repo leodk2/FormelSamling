@@ -1,6 +1,6 @@
 ﻿namespace Formelsamling
 {
-    partial class Form1
+    partial class FormelSamling
     {
         /// <summary>
         /// Required designer variable.
