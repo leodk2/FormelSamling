@@ -23,6 +23,7 @@ namespace Formelsamling
             FormelSamling form = new FormelSamling();
             Login login = new Login();
             //SQL.SqlConnect();
+            InternetAndSecurity.ShowNetworkInterfaces();
 
             // run program
             Application.Run(login);

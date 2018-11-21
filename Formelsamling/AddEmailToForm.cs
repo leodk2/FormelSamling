@@ -20,9 +20,9 @@ namespace Formelsamling
 
         private void AddEmail_Click(object sender, EventArgs e)
         {
-
-            SQL.SqlWrite(EmailField.Text.ToLower().Insert(0,"'")+"'");
-            SQL.SqlReader("Uid", EmailField.Text.ToLower(), "Uid", SQL.sqlConnection);
+            string emailSql = EmailField.Text.ToLower().Insert(0, "'") + "'";
+            SQL.SqlWrite(emailSql, "UId");
+            SQL.SqlReader("UId", emailSql, "UId", SQL.sqlConnection);
 
 
         }

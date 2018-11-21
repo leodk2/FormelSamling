@@ -60,13 +60,16 @@ namespace Formelsamling.Authentication
 
         }
 
-        public static void SqlWrite(string email)
+        public static void SqlWrite(string email, string column)
         {
-            //sqlConnection.Open(); ;
-            cmd = new SqlCommand("insert into dbo.user_Codes (UId) values ("+email+")", sqlConnection);
-            cmd = new SqlCommand("INSERT INTO ")
+            sqlConnection.Open(); ;
+            cmd = new SqlCommand("insert into dbo.user_Codes ("+column+") values ("+email+")", sqlConnection);
+            // cmd = new SqlCommand("INSERT INTO ")
             //cmd = new SqlCommand("insert into dbo.user_Codes (UID), values(" + email + ")", sqlConnection);
+            cmd.ExecuteNonQuery();
             Print(email);
+            //cmd = new SqlCommand("insert intodbo.user_Codes("++")")
+            sqlConnection.Close();
             
         }
         //this method is run whenever we need to read something from the SQL database
