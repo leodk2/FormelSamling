@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
+
 
 namespace Formelsamling.Authentication
 {
     class GetMacAddress
     {
+        
         public static NetworkInterface[] ShowNetworkInterfaces()
         {
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
@@ -46,8 +49,9 @@ namespace Formelsamling.Authentication
                     
                 }
                 Console.WriteLine();
-                //return nics;
+                
             }
+            //returns a list of all NICs(Network Interface Cards)
             return nics;
         }
        

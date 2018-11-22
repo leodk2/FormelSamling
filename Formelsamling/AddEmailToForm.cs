@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Formelsamling.Authentication;
 
+
 namespace Formelsamling
 {
     public partial class AddEmailToForm : Form
@@ -20,10 +21,9 @@ namespace Formelsamling
 
         private void AddEmail_Click(object sender, EventArgs e)
         {
-            string emailSql = EmailField.Text.ToLower().Insert(0, "'") + "'";
-            SQL.SqlWrite(emailSql, "UId");
-            SQL.SqlReader("UId", emailSql, "UId", SQL.sqlConnection);
+            var mac = GetMacAddress.ShowNetworkInterfaces();
 
+            SQL.AddUser(EmailField.Text, mac);
 
         }
     }

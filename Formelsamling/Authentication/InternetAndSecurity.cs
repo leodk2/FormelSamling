@@ -59,17 +59,59 @@ namespace Formelsamling.Authentication
             //SqlReader("Uid", "kim@strandjaegervej.dk", "Code1", sqlConnection);
 
         }
-
+        #region SqlWrite
         public static void SqlWrite(string email, string column)
         {
-            sqlConnection.Open(); ;
+            sqlConnection.Open(); 
             cmd = new SqlCommand("insert into dbo.user_Codes ("+column+") values ("+email+")", sqlConnection);
-            // cmd = new SqlCommand("INSERT INTO ")
-            //cmd = new SqlCommand("insert into dbo.user_Codes (UID), values(" + email + ")", sqlConnection);
             cmd.ExecuteNonQuery();
             Print(email);
-            //cmd = new SqlCommand("insert intodbo.user_Codes("++")")
             sqlConnection.Close();
+            
+        }
+        public string AddGnyph(string str)
+        {
+            return str.Insert(0, "'") + "'";
+        }
+        public string AddGnyph(NetworkInterface[] interfaces)
+        {
+            int arrayLength = interfaces.Length;
+            string str = arrayLength.ToString();
+            string rtnStr = str.Insert(0, "'") + "'";
+            return rtnStr;
+        }
+        public static void AddUser(string email, NetworkInterface[] interfaces)
+        {
+            sqlConnection.Open();
+            SQL sql = new SQL();
+            email = sql.AddGnyph(email);
+            string interfacesStr = sql.AddGnyph(interfaces);
+            var arrayIndexStr = sql.AddGnyph( interfaces[0].ToString());
+            string finalString = email + "," + interfacesStr;
+            cmd = new SqlCommand("insert into dbo.user_Codes(Uid, NoOfMacs) Values ("+finalString+")", sqlConnection );
+            //cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values(" + arrayIndexStr + ")");
+            AddMac(interfaces);
+            cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+            //Vi kan ikke lave en kommando som tilføjer alle tre værdier på en gang, vi får en fejl hvis vi gør
+            //og vi kan heller ikke lave en ny sql command
+            
+        }
+        public static void AddMac(NetworkInterface[] networkInterfaces)
+        {
+            SQL sql = new SQL();
+            var arrayIndexStr = sql.AddGnyph(networkInterfaces[0].ToString());
+            cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values("+arrayIndexStr+")");
+            cmd.ExecuteNonQuery();
+        }
+        #endregion
+        public static SqlParameter SqlAddMac()
+        {
+            sqlConnection.Open();
+            cmd = new SqlCommand ("INSERT INTO user_Codes(Mac) VALUES(@Mac)", sqlConnection);
+            var add = cmd.Parameters.AddWithValue("@Mac", GetMacAddress.ShowNetworkInterfaces());
+            cmd.ExecuteNonQuery();
+            return add;
             
         }
         //this method is run whenever we need to read something from the SQL database
@@ -115,15 +157,6 @@ namespace Formelsamling.Authentication
                 sqlConnection.Close();
                 return false;
             }
-            
-        }
-        public SqlParameter SqlAddMac()
-        {
-            sqlConnection.Open();
-            cmd = new SqlCommand ("INSERT INTO user_Codes(Mac) VALUES(@Mac)", sqlConnection);
-            var add = cmd.Parameters.AddWithValue("@Mac", GetMacAddress.ShowNetworkInterfaces());
-            cmd.ExecuteNonQuery();
-            return add;
             
         }
 
