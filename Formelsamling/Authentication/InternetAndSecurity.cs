@@ -121,7 +121,7 @@ namespace Formelsamling.Authentication
         {
             sqlConnection.Open();
             cmd = new SqlCommand ("INSERT INTO user_Codes(Mac) VALUES(@Mac)", sqlConnection);
-            var add = cmd.Parameters.AddWithValue("@Mac", InternetAndSecurity.ShowNetworkInterfaces());
+            var add = cmd.Parameters.AddWithValue("@Mac", GetMacAddress.ShowNetworkInterfaces());
             cmd.ExecuteNonQuery();
             return add;
             

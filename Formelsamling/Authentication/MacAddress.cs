@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 
-namespace MacAddressTest
+namespace Formelsamling.Authentication
 {
-    class Program
+    class GetMacAddress
     {
-        public static void ShowNetworkInterfaces()
+        public static NetworkInterface[] ShowNetworkInterfaces()
         {
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
@@ -18,7 +18,7 @@ namespace MacAddressTest
             if (nics == null || nics.Length < 1)
             {
                 Console.WriteLine("  No network interfaces found.");
-                return;
+                return null;
             }
 
             Console.WriteLine("  Number of interfaces .................... : {0}", nics.Length);
@@ -42,14 +42,14 @@ namespace MacAddressTest
                     {
                         Console.Write("-");
                     }
+                   
+                    
                 }
                 Console.WriteLine();
+                //return nics;
             }
+            return nics;
         }
-        static void Main(string[] args)
-        {
-            ShowNetworkInterfaces();
-            Console.ReadLine();
-        }
+       
     }
 }
