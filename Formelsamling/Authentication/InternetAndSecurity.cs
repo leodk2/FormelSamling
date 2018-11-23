@@ -83,25 +83,36 @@ namespace Formelsamling.Authentication
         public static void AddUser(string email, NetworkInterface[] interfaces)
         {
             sqlConnection.Open();
-            SQL sql = new SQL();
-            email = sql.AddGnyph(email);
-            string interfacesStr = sql.AddGnyph(interfaces);
-            var arrayIndexStr = sql.AddGnyph( interfaces[0].ToString());
-            string finalString = email + "," + interfacesStr;
-            cmd = new SqlCommand("insert into dbo.user_Codes(Uid, NoOfMacs) Values ("+finalString+")", sqlConnection );
-            //cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values(" + arrayIndexStr + ")");
-            AddMac(interfaces);
-            cmd.ExecuteNonQuery();
-            sqlConnection.Close();
-            //Vi kan ikke lave en kommando som tilføjer alle tre værdier på en gang, vi får en fejl hvis vi gør
-            //og vi kan heller ikke lave en ny sql command
+            Print(interfaces[0]);
+            try
+            {
+                SQL sql = new SQL();
+                email = sql.AddGnyph(email);
+                string interfacesStr = sql.AddGnyph(interfaces);
+                var arrayIndexStr = sql.AddGnyph(interfaces[0].ToString());
+                string finalString = email + "," + interfacesStr;
+                cmd = new SqlCommand("insert into dbo.user_Codes(Uid, NoOfMacs) Values (" + finalString + ")", sqlConnection);
+                AddMac(interfaces, sqlConnection);
+                cmd.ExecuteNonQuery();
+                sqlConnection.Close();
+                //Vi kan ikke lave en kommando som tilføjer alle tre værdier på en gang, vi får en fejl hvis vi gør
+                //og vi kan heller ikke lave en ny sql command
+            }
+            catch (Exception e)
+            {
+                Print(e.ToString());
+                Print("false exception");
+                sqlConnection.Close();
+                return;
+            }
+            
             
         }
-        public static void AddMac(NetworkInterface[] networkInterfaces)
+        public static void AddMac(NetworkInterface[] networkInterfaces, SqlConnection sqlConnection)
         {
             SQL sql = new SQL();
             var arrayIndexStr = sql.AddGnyph(networkInterfaces[0].ToString());
-            cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values("+arrayIndexStr+")");
+            cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values("+arrayIndexStr+")", sqlConnection);
             cmd.ExecuteNonQuery();
         }
         #endregion
