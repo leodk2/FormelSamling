@@ -88,9 +88,20 @@ namespace Formelsamling.Authentication
             {
                 SQL sql = new SQL();
                 email = sql.AddGnyph(email);
-                string interfacesStr = sql.AddGnyph(interfaces);
+                //string interfacesStr = sql.AddGnyph(interfaces);
+                Console.WriteLine("|-|-|-|-|-|-|-|-|-|-|-|-| " + sql.AddGnyph(interfaces));
+                string macString =
+                    (
+                    from nic in NetworkInterface.GetAllNetworkInterfaces()
+                    where nic.OperationalStatus == OperationalStatus.Up
+                    select nic.GetPhysicalAddress().ToString()
+                    ).FirstOrDefault();
+                macString = sql.AddGnyph(macString);
+                Console.WriteLine("|+|+|+|+|+|+|+|+|+|+|+|+| " + macString); 
+
                 var arrayIndexStr = sql.AddGnyph(interfaces[0].ToString());
-                string finalString = email + "," + interfacesStr;
+                //string finalString = email + "," + interfacesStr;
+                string finalString = email + "," + macString;
                 cmd = new SqlCommand("insert into dbo.user_Codes(Uid, NoOfMacs) Values (" + finalString + ")", sqlConnection);
                 AddMac(interfaces, sqlConnection);
                 cmd.ExecuteNonQuery();

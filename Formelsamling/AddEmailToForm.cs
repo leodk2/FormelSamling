@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Formelsamling.Authentication;
+using System.Net.NetworkInformation;
 
 
 namespace Formelsamling
@@ -22,7 +23,7 @@ namespace Formelsamling
         private void AddEmail_Click(object sender, EventArgs e)
         {
             var mac = GetMacAddress.ShowNetworkInterfaces();
-
+            
             SQL.AddUser(EmailField.Text, mac);
 
         }
