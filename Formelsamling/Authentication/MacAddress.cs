@@ -11,7 +11,7 @@ namespace Formelsamling.Authentication
 {
     class GetMacAddress
     {
-        public static PhysicalAddress[] ShowNetworkInterfaces()
+        public static PhysicalAddress ShowNetworkInterfaces()
         {
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
@@ -23,7 +23,6 @@ namespace Formelsamling.Authentication
                 return null;
             }
             PhysicalAddress address;
-            PhysicalAddress[] physicalAddresses;
             Console.WriteLine("  Number of interfaces .................... : {0}", nics.Length);
             foreach (NetworkInterface adapter in nics)
             {
@@ -34,7 +33,6 @@ namespace Formelsamling.Authentication
                  Console.WriteLine("  Interface type .......................... : {0}", adapter.NetworkInterfaceType);*/
                 Console.Write("  Physical address ........................ : ");
                 address = adapter.GetPhysicalAddress();
-                physicalAddresses = new PhysicalAddress[] { address };
                 byte[] bytes = address.GetAddressBytes();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -51,7 +49,7 @@ namespace Formelsamling.Authentication
                 }
                 Console.WriteLine();
 
-                return physicalAddresses;
+                return address;
             }
             //returns a list of all NICs(Network Interface Cards)
             Console.Write(nics[4]);
