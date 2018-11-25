@@ -49,10 +49,11 @@ namespace Formelsamling.Authentication
                 }
                 Console.WriteLine();
 
+                return address;
             }
             //returns a list of all NICs(Network Interface Cards)
             Console.Write(nics[4]);
-            return address;
+            return null;
         }
         /*public static NetworkInterface[] ShowNetworkInterfaces()
         {
