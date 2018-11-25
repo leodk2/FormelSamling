@@ -80,16 +80,16 @@ namespace Formelsamling.Authentication
             string rtnStr = str.Insert(0, "'") + "'";
             return rtnStr;
         }
-        public static void AddUser(string email, NetworkInterface[] interfaces)
+        public static void AddUser(string email, PhysicalAddress interfaces)
         {
             sqlConnection.Open();
-            Print(interfaces[0]);
+            Print(interfaces);
             try
             {
                 SQL sql = new SQL();
                 email = sql.AddGnyph(email);
                 //string interfacesStr = sql.AddGnyph(interfaces);
-                Console.WriteLine("|-|-|-|-|-|-|-|-|-|-|-|-| " + sql.AddGnyph(interfaces));
+                Console.WriteLine("|-|-|-|-|-|-|-|-|-|-|-|-| " + sql.AddGnyph(interfaces.ToString()));
                 string macString =
                     (
                     from nic in NetworkInterface.GetAllNetworkInterfaces()
@@ -99,11 +99,11 @@ namespace Formelsamling.Authentication
                 macString = sql.AddGnyph(macString);
                 Console.WriteLine("|+|+|+|+|+|+|+|+|+|+|+|+| " + macString); 
 
-                var arrayIndexStr = sql.AddGnyph(interfaces[0].ToString());
+                var arrayIndexStr = sql.AddGnyph(interfaces.ToString());
                 //string finalString = email + "," + interfacesStr;
                 string finalString = email + "," + macString;
                 cmd = new SqlCommand("insert into dbo.user_Codes(Uid, NoOfMacs) Values (" + finalString + ")", sqlConnection);
-                AddMac(interfaces, sqlConnection);
+                //AddMac(interfaces, sqlConnection);
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 //Vi kan ikke lave en kommando som tilføjer alle tre værdier på en gang, vi får en fejl hvis vi gør
