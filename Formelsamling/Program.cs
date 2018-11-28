@@ -24,6 +24,7 @@ namespace Formelsamling
             Login login = new Login();
             //SQL.SqlConnect();
             GetMacAddress.ShowNetworkInterfaces();
+            SQL.SqlReader("Uid", login.EmailField.Text, login.EmailField.Text, SQL.sqlConnection);
 
             // run program
             Application.Run(login);

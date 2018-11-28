@@ -25,7 +25,7 @@ namespace Formelsamling
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SQL.SqlReader("Uid", EmailField.Text,  "Mac", SQL.sqlConnection))
+            if (SQL.SqlReader("Email", EmailField.Text,  "Mac", SQL.sqlConnection))
             {
                 this.Hide();
                 FormelSamling formelsamling = new FormelSamling();
@@ -47,10 +47,9 @@ namespace Formelsamling
         private void NyBruger_Click(object sender, EventArgs e)
         {
             AddEmailToForm addEmailToForm = new AddEmailToForm();
-            Login login = new Login();
-            addEmailToForm.Location = login.Location;
+            addEmailToForm.Location = this.Location;
             Point point = new Point();
-            point = login.Location;
+            point = this.Location;
             addEmailToForm.Location = point;
 
             addEmailToForm.Show();

@@ -40,7 +40,7 @@ namespace Formelsamling.Authentication
             a = a.ToString();
             Console.WriteLine(a);
         }
-        
+
         public static void SqlConnect()
         {
             //initialize a new login screen to get the email.text property
@@ -54,7 +54,7 @@ namespace Formelsamling.Authentication
             //open the connection to the sql database
             sqlConnection.Open();
             Print("Åben");
-           
+
             //I don't think that this method should be here in the final release of the program
             //SqlReader("Uid", "kim@strandjaegervej.dk", "Code1", sqlConnection);
 
@@ -62,12 +62,12 @@ namespace Formelsamling.Authentication
         #region SqlWrite
         public static void SqlWrite(string email, string column)
         {
-            sqlConnection.Open(); 
-            cmd = new SqlCommand("insert into dbo.user_Codes ("+column+") values ("+email+")", sqlConnection);
+            sqlConnection.Open();
+            cmd = new SqlCommand("insert into dbo.user_Codes (" + column + ") values (" + email + ")", sqlConnection);
             cmd.ExecuteNonQuery();
             Print(email);
             sqlConnection.Close();
-            
+
         }
         public string AddGnyph(string str)
         {
@@ -95,7 +95,7 @@ namespace Formelsamling.Authentication
                     from nic in NetworkInterface.GetAllNetworkInterfaces()
                     where nic.OperationalStatus == OperationalStatus.Up
                     select nic.GetPhysicalAddress().ToString()
-                    ).FirstOrDefault();*/
+                    ).FirstOrDefault();
                 //macString = sql.AddGnyph(macString);
                 //Console.WriteLine("|+|+|+|+|+|+|+|+|+|+|+|+| " + macString); 
 
@@ -117,72 +117,65 @@ namespace Formelsamling.Authentication
                 sqlConnection.Close();
                 return;
             }
-            
-            
+
+
         }
         public static void AddMac(NetworkInterface[] networkInterfaces, SqlConnection sqlConnection)
         {
             SQL sql = new SQL();
             var arrayIndexStr = sql.AddGnyph(networkInterfaces[0].ToString());
-            cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values("+arrayIndexStr+")", sqlConnection);
+            cmd = new SqlCommand("insert into dbo.user_Codes(Mac) Values(" + arrayIndexStr + ")", sqlConnection);
             cmd.ExecuteNonQuery();
         }
         #endregion
         public static SqlParameter SqlAddMac()
         {
             sqlConnection.Open();
-            cmd = new SqlCommand ("INSERT INTO user_Codes(Mac) VALUES(@Mac)", sqlConnection);
+            cmd = new SqlCommand("INSERT INTO user_Codes(Mac) VALUES(@Mac)", sqlConnection);
             var add = cmd.Parameters.AddWithValue("@Mac", GetMacAddress.ShowNetworkInterfaces());
             cmd.ExecuteNonQuery();
             return add;
-            
+
         }
         //this method is run whenever we need to read something from the SQL database
         public static bool SqlReader(string columnHeader, string userToLookFor, string ItemToLookFor, SqlConnection sqlConnection)
         {
-            SqlConnect();
+            sqlConnection.Open();
             try
             {
-                //!! creates new cmd and reader. Problem is if it's called in different instances, it'll create a new for each
-                if (cmd == null)
-                {
-                    cmd = new SqlCommand("select * from dbo.user_Codes", sqlConnection);
-                    Console.WriteLine("new read");
-                }
-                if (reader != null)
-                {
-                    reader.Close();
-                }
+                //laver kommandoen som bliver sendt til databasen
+                cmd = new SqlCommand("select " + ItemToLookFor + " from dbo.UserLogin;", sqlConnection);
+                //kommandoen bliver sendt
                 reader = cmd.ExecuteReader();
-                Print("new reader");
-
-                Console.WriteLine(userToLookFor);
-
-                // reads and stuff
+                //readeren læser gennem databasen 
                 while (reader.Read())
                 {
+                    //Der bliver tjekket for om det som readeren læser i databasen er ens med det som er sat in som parameter
                     if (reader[columnHeader].ToString() == userToLookFor)
                     {
-                        Print(reader[ItemToLookFor]);
-                        Console.WriteLine("true");
-                        sqlConnection.Close();
+                        Print(userToLookFor);
+                        Print("True");
                         return true;
+                    }
+                    else
+                    {
+                        Print("False");
+                        return false;
                     }
 
                 }
-                Console.WriteLine("false");
-                return false;
             }
+
             catch (Exception e)
             {
                 Print(e.ToString());
                 Print("false exception");
                 sqlConnection.Close();
                 return false;
+
             }
-            
+            return false;
         }
 
     }
-
 }
