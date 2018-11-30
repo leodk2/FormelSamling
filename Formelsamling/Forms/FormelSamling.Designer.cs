@@ -79,8 +79,9 @@
             this.ResultTextbox.TabIndex = 5;
             this.ResultTextbox.Text = "Resultat her";
             // 
-            // Form1
+            // FormelSamling
             // 
+            this.AcceptButton = this.CalculateButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -90,7 +91,7 @@
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.FormelTree);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "FormelSamling";
             this.Text = "Formelsamling";
             this.ResumeLayout(false);
             this.PerformLayout();

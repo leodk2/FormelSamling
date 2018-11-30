@@ -22,7 +22,7 @@ namespace Formelsamling
 
         private void AddEmail_Click(object sender, EventArgs e)
         {
-            SQL.AddToDB(EmailField.Text, GetMacAddress.GetPhysicalAddress().ToString(), GetMacAddress.GetNumberOfMacs().ToString(), SQL.sqlConnection);
+            
         }
     }
 }

@@ -49,18 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEmailToForm.cs">
+    <Compile Include="Forms\AddEmailToForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEmailToForm.Designer.cs">
+    <Compile Include="Forms\AddEmailToForm.Designer.cs">
       <DependentUpon>AddEmailToForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Authentication\SQL.cs" />
     <Compile Include="CustomDelegates.cs" />
-    <Compile Include="FormelSamling.cs">
+    <Compile Include="Forms\FormelSamling.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormelSamling.Designer.cs">
+    <Compile Include="Forms\FormelSamling.Designer.cs">
       <DependentUpon>FormelSamling.cs</DependentUpon>
     </Compile>
     <Compile Include="Formulary\MathFormulary\CircleCircumference.cs" />
@@ -70,22 +70,22 @@
     <Compile Include="Formulary\PhysicsFormulary\OhmLaw.cs" />
     <Compile Include="Formulary\Properties\Constants.cs" />
     <Compile Include="Formulary\Properties\FormulaInterfaces.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="Forms\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.designer.cs">
+    <Compile Include="Forms\Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Authentication\MacAddress.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddEmailToForm.resx">
+    <EmbeddedResource Include="Forms\AddEmailToForm.resx">
       <DependentUpon>AddEmailToForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormelSamling.resx">
+    <EmbeddedResource Include="Forms\FormelSamling.resx">
       <DependentUpon>FormelSamling.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -39,7 +39,7 @@ namespace Formelsamling.Authentication
         }
         
         
-#region SQL
+        #region SQL
         static SqlCommand cmd;
         static SqlDataReader reader;
         public static string AddGnyph(string str)
@@ -49,10 +49,14 @@ namespace Formelsamling.Authentication
      
         public static void AddToDB(string email, string macAddress, string numOfMacs, SqlConnection sqlConnection)
         {
-            AddGnyph(email); AddGnyph(macAddress); AddGnyph(numOfMacs);
+            //Vi tilføjer gnypher til alle strings (eller varchars som de hedder i sql)
+            AddGnyph(email); AddGnyph(macAddress);
+            //Vi laver en commandstring til at sende til databasen
             string cmdStr = "insert into dbo.userLogin (Email, Mac,  NoOfMacs) values(" + AddGnyph(email) + ", "+AddGnyph(macAddress)+"," + numOfMacs + ")";
             Print(cmdStr);
+            //Vi åbner forbindelsen til databasen
             sqlConnection.Open();
+            //Vi indsætter strengen som en sqlkommando og kører den
             cmd = new SqlCommand(cmdStr, sqlConnection);
             cmd.ExecuteNonQuery();
             sqlConnection.Close();
@@ -62,9 +66,9 @@ namespace Formelsamling.Authentication
         //this method is run whenever we need to read something from the SQL database
          public static bool SqlReader(string columnHeader, string userToLookFor, string ItemToLookFor, SqlConnection sqlConnection)
         {
-            sqlConnection.Open();
             try
             {
+                sqlConnection.Open();
                 //laver kommandoen som bliver sendt til databasen
                 cmd = new SqlCommand("select " + ItemToLookFor + " from dbo.UserLogin;", sqlConnection);
                 //kommandoen bliver sendt
@@ -77,11 +81,13 @@ namespace Formelsamling.Authentication
                     {
                         Print(userToLookFor);
                         Print("True");
+                        sqlConnection.Close();
                         return true;
                     }
                     else
                     {
                         Print("False");
+                        sqlConnection.Close();
                         return false;
                     }
 
@@ -98,7 +104,7 @@ namespace Formelsamling.Authentication
             }
             return false;
         }
-#endregion
+        #endregion
 
     }
 
