@@ -23,8 +23,7 @@ namespace Formelsamling
             FormelSamling form = new FormelSamling();
             Login login = new Login();
             //SQL.SqlConnect();
-            GetMacAddress.ShowNetworkInterfaces();
-            SQL.SqlReader("Uid", login.EmailField.Text, login.EmailField.Text, SQL.sqlConnection);
+            GetMacAddress.GetPhysicalAddress();
 
             // run program
             Application.Run(login);

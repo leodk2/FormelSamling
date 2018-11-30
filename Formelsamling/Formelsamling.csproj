@@ -55,7 +55,7 @@
     <Compile Include="AddEmailToForm.Designer.cs">
       <DependentUpon>AddEmailToForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Authentication\InternetAndSecurity.cs" />
+    <Compile Include="Authentication\SQL.cs" />
     <Compile Include="CustomDelegates.cs" />
     <Compile Include="FormelSamling.cs">
       <SubType>Form</SubType>
